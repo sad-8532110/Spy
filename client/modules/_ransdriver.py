@@ -8,7 +8,7 @@ class ransdriver:
         
         self.__key_code = None
         self.__data = bytes()
-        self.__tmp_file = 'tmp_file.tmp'
+        self.__tmp_file = '.tmp_file.tmp'
         self.__file_signature = 'file_signature'.encode('utf-8')
         self.__EOF_signature = 'eof_signature'.encode('utf-8')
         self.__done_message = 'DONE'.encode('utf-8')

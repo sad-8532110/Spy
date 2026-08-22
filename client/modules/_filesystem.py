@@ -1,4 +1,4 @@
-from os import listdir, replace
+from os import listdir, replace, fsync
 from os.path import isfile, abspath, getsize
 
 #--------------------------------------- CLASS AND FUNCTIONS
@@ -13,24 +13,25 @@ class filesystem:
         open a file if it is close
         """
         if file_path not in self.__files:
-            open(file_path, 'a+b').close()
-            self.__files[file_path] = open(file_path, 'r+b')
+            try:
+                self.__files[file_path] = open(file_path, 'r+b')
+            except FileNotFoundError:
+                self.__files[file_path] = open(file_path, 'w+b')
     
     def read_file(self, file_path:str):
         """
         read the file chunk by chunk
         """
-        if getsize(file_path) < 10:
-            yield self.__files[file_path].read()
-        else:
-            while chunk := self.__files[file_path].read(self.__buffer_size):
-                yield chunk
+        while chunk := self.__files[file_path].read(self.__buffer_size):
+            yield chunk
     
     def write_file(self, file_path:str, data:bytes):
         """
         write data to an opened file
         """
         self.__files[file_path].write(data)
+        self.__files[file_path].flush()
+        fsync(self.__files[file_path].fileno())
     
     def close_file(self, file_path:str):
         """
