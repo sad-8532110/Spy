@@ -26,7 +26,7 @@ class prompt_manager:
         return input(self.prompt + text + '~$ ')
     
     def print(self, text):
-        self.console.print(text)
+        self.console.print(text, markup=False)
     
     def make_table(self, title:str, columns):
         self.table = Table(title=title)

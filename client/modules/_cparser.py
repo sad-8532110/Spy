@@ -27,6 +27,7 @@ class Command(str):
                     if self[index] == '"':
                         break
                     part += self[index]
+                    index += 1
             else:
                 part += self[index]
             index += 1

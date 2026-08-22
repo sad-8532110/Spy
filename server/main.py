@@ -1,4 +1,3 @@
-from time import sleep
 from modules import *
 
 #-------------------------------------- CLASS AND FUNCTIONS
@@ -13,22 +12,29 @@ class main:
     
     def start(self):
         self.welcome()
-        self.mode = input('please enter an option: ')
-        match self.mode.lower():
-            case 'help' | 'h':
-                self.help()
-            case '' | 'run':
-                self.run()
-            case _:
-                pass
+        while True:
+            self.mode = input('please enter an option: ')
+            match self.mode.lower():
+                case 'help' | 'h':
+                    self.help()
+                case '' | 'run':
+                    self.run()
+                case 'exit' | 'quit':
+                    break
 
     def welcome(self):
         self._prompt_manager.cbcprint('Hello, Dear User !\nWelcome to Spy\nhere is what I wrote, do you like it ?')
     
     def menu(self):
+        """
+        need help to make it pretty
+        """
         self._prompt_manager.print("1. run\n2. help\n3. exit")
     
     def help(self):
+        """
+        need to help to make it pretty
+        """
         pass
     
     def run(self):

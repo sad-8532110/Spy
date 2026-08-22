@@ -49,7 +49,14 @@ class Driver:
             self._prompt_manager.print(self._data)
     
     def __help(self, arguments:dict):
-        pass
+        """
+        shows the help for other commands
+        """
+        for command in arguments['command']:
+            if command in self.commands:
+                self._prompt_manager.print(f'help for command {command}:\n\n{self.commands[command].__doc__}')
+            else:
+                self._prompt_manager.print(f'Command {command} not found')
     
     def close_connection(self, arguments:dict):
         """
