@@ -1,4 +1,4 @@
-# [Spy]
+# Spy
 
 > ⚠️ **SECURITY RESEARCH / EDUCATIONAL PROJECT**
 
