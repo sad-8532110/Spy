@@ -1,4 +1,3 @@
-from subprocess import getoutput
 from modules import *
 
 #--------------------------------------- CLASS AND FUNCTIONS
