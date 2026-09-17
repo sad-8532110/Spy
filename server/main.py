@@ -19,8 +19,17 @@ class main:
                     self.help()
                 case '' | 'run':
                     self.run()
+                case 'menu' | 'm':
+                    self.menu()
+                case 'cls' | 'clear':
+                    self._prompt_manager.clear()
                 case 'exit' | 'quit':
                     break
+                case _:
+                    self._prompt_manager.print(
+                        f"command '{self.mode}' not found",
+                        style="bold red"
+                    )
 
     def welcome(self):
         self._prompt_manager.cbcprint('Hello, Dear User !\nWelcome to Spy\nhere is what I wrote, do you like it ?')
@@ -29,12 +38,13 @@ class main:
         """
         need help to make it pretty
         """
-        self._prompt_manager.print("1. run\n2. help\n3. exit")
+        self._prompt_manager.print("1. run/r\n2. help/h\n3. menu/m\n4. exit/quit")
     
     def help(self):
         """
         need to help to make it pretty
         """
+        self._prompt_manager.print("List of commands:\n    'help' for showing help message\n   'run' for start searching connections\n  'menu' for showing list of commands in quick way\n  'exit' to exit")
         pass
     
     def run(self):
